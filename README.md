@@ -1,5 +1,4 @@
 # Delta
-#### Video Demo: https://youtu.be/57kvxnrhwuA
 #### Description
 Delta is a website where you can store text online and share it with others. Each text stored 
 is called a `Delta` and multiple texts are being referred to as `Deltas`.
