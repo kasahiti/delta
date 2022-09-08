@@ -1,0 +1,5 @@
+RewriteEngine on
+
+RewriteRule ^api/delta/?$                   delta.php?%{QUERY_STRING}
+RewriteRule ^api/delta/([a-zA-Z0-9\-]+)$    delta.php?uuid=$1&%{QUERY_STRING}
+RewriteRule uuid                            index.html

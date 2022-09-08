@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8"/>
+        <title>Delta - CS50x Kastriot Sahiti</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content="Delta is a web application used to store and share text online."/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta name="theme-color" content="#007373"/>
+
+        <meta name="application-name" content="Delta">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-title" content="Delta">
+        <meta name="msapplication-TileColor" content="#a80101">
+        <meta name="theme-color" content="#a80101">
+        <link rel="icon" type="image/png" sizes="260x260" href="/resources/images/icon.png" crossorigin="use-credentials">
+
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <!-- Material Design Bootstrap -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.css">
+        <!--Quill-->
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+        <!-- HighlightJS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/default.min.css">
+        <!-- Delta CSS -->
+        <link rel="stylesheet" href="/resources/css/main.css">
+    </head>
+    <body>
+        <div id="page-container">
+            <div class="content-wrap">
+                <header class="index-header fixed-top scrolling-navbar" id="index-header">
+                    <div class="mobile-hidden">
+                        <a href="/" class="brand"><img class="img-fld" src="/resources/images/logo.svg" alt="Delta's logo" width="250px"></a>
+                    </div>
+                    <nav class="navbar navbar-light desktop-hidden" style="width: 100%">
+                        <a href="/" class="brand" style="margin: auto"><img class="img-fld" src="/resources/images/logo.svg" alt="Delta's logo" width="120px"></a>
+                    </nav>
+                </header>
+                <section>
+                    <div class="container upp" role="main" style="align-self: center;">
+                        <div class="row justify-content-around mb-4">
+                            <div class="col-12 col-md-12 col-lg-7 align-self-center" style="text-align: center;">
+                                <h1 style="font-size: 3em; font-weight: bold; color: #007373" class="mobile-hidden">Your data. <span style="color: #222766" id="dig">Your life.</span></h1>
+                                <h1 style="font-size: 3em; font-weight: bold; color: #007373" class="desktop-hidden mobile-ml">Your data. <br>
+                                    <span style="color: #222766" id="digM">Your life.</span></h1>
+                                <h3>Start using Delta !</h3>
+                                <p>By the way, we respect your privacy, <br>so we don't store or use any cookies &#128540;</p>
+                            </div>
+                            <div class="col-12 col-md-12 col-lg-5 align-self-center">
+                                <div style="text-align: center">
+                                    <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_OvY5ZL.json"  background="transparent" speed="1"  style="width: 350px; margin: auto"  loop  autoplay></lottie-player>                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="url hidden" id="results">Here's your link <br><span id="result"></span></div>
+
+                    </div>
+                    <div class="row" id="editorwrap">
+                        <div id="edit"></div>
+                    </div>
+                    <div class="row mt-4 justify-content-center">
+                        <a class="btn btn-primary btn-bl" role="button" id="settings">
+                            <i class="fas fa-cog" aria-hidden="true"></i> Settings
+                        </a>
+                        <a class="btn btn-primary btn-dpl" role="button" id="save">
+                            <i class="fas fa-save" aria-hidden="true"></i> Save
+                        </a>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="mainModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Settings of the Delta</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeSettings">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="passwordProtect" />
+                                            <label class="form-check-label" for="passwordProtect">Protect with password?</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="selftDestroy" />
+                                            <label class="form-check-label" for="selftDestroy">Delete the Delta after first view?</label>
+                                        </div>
+                                        <div class="hidden" id="pwdInput">
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-11">
+                                                    <div class="form-outline">
+                                                        <input type="password" id="typePassword" class="form-control" />
+                                                        <label class="form-label" for="typePassword">Password of the Delta</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1 btnShowPassword">
+                                                    <i class="fas fa-eye-slash" id="iconPassword" style="cursor: pointer" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary btn-red" id="closeSettingsb">Close</button>
+                                        <button type="button" class="btn btn-primary btn-dpl" id="saveSettings">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="passwordPromptModal" tabindex="-1" role="dialog" aria-labelledby="deltaSettings" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="passwordPrompt">Please input Delta's password</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-11">
+                                                <div class="form-outline">
+                                                    <input type="password" id="passwordDecrypt" class="form-control" />
+                                                    <label class="form-label" for="passwordDecrypt">Password</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-1 btnShowPassword">
+                                                <i class="fas fa-eye-slash" id="iconPasswordDecrypt" style="cursor: pointer" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary btn-dpl" id="btnDecrypt">Decrypt</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="errorMsgBox" tabindex="-1" aria-labelledby="deltaErrorMsgBox" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalError">Error</h5>
+                                        <button
+                                                type="button"
+                                                class="btn-close"
+                                                data-mdb-dismiss="modal"
+                                                aria-label="Close"
+                                        ></button>
+                                    </div>
+                                    <div class="modal-body">There was an error on Delta's server. Delta was not saved.</div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary btn-red" data-mdb-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="page-footer font-small unique-color-dark">
+            <div class="footer-copyright text-center py-3">© 2021 Copyright:
+                <a href="https://www.linkedin.com/in/kasahiti/"> Kastriot Sahiti</a>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- JQuery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Teko:400,700&display=swap">
+        <!-- Bootstrap core JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+        <!-- MDB core JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.js"></script>
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+        <script src="/resources/js/main.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    </body>
+</html>

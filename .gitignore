@@ -1,0 +1,8 @@
+
+src/.idea/
+
+src/composer.phar
+
+src/composer.lock
+
+.idea/
